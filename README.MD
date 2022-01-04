@@ -52,3 +52,7 @@ pull
 `docker run --hostname localhost --name rabbit-server -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin2022 -p 5672:5672 -p 15672:15672 -d rabbitmq:3-management`
 
 ## Setup Mongodb
+
+## Setup swagger doc
+
+- https://swagger.io/docs/specification/authentication/oauth2/
