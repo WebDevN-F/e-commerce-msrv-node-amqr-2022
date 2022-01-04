@@ -16,8 +16,8 @@
 ## Try Script
 
 1. [Auth Service](http://localhost:5000) `cd src/auth-service && npm start`
-2. [Product Service](http://localhost:6000) `cd src/product-service && npm start`
-3. [Order Service](http://localhost:7000) `cd src/order-service && npm start`
+2. [Product Service](http://localhost:6070) `cd src/product-service && npm start`
+3. [Order Service](http://localhost:7070) `cd src/order-service && npm start`
 
 ## VIDEO tutorial
 
@@ -43,6 +43,12 @@ copy file from docker to location file
 
 ## Setup RabbitMQ
 
-`docker run --name order-rabbit -d rabbitmq:3`
+`docker run --name rabbitmqdemo -p 5672:5672 -d rabbitmq:3`
+
+pull
+
+`docker pull rabbitmq:3-management`
+
+`docker run --hostname localhost --name rabbit-server -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin2022 -p 5672:5672 -p 15672:15672 -d rabbitmq:3-management`
 
 ## Setup Mongodb

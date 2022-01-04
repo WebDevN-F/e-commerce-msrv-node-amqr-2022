@@ -91,6 +91,7 @@ router.post('/login', controller.login);
  *                 type: string
  *                createdAt:
  *                 type: string
+ *                 format: date-time
  */
 router.post('/register', controller.register);
 
