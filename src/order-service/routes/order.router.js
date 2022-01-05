@@ -1,7 +1,7 @@
 // routes/auth.router.js
 const express = require('express');
 const router = express();
-const controller = require('../controlles/product.controller');
+const controller = require('../controlles/order.controller');
 const isAuthenticated = require('../midlewares/authentication');
 
 /**
@@ -61,59 +61,6 @@ const isAuthenticated = require('../midlewares/authentication');
  *               error:
  *                type: any
  */
-router.post('/create', isAuthenticated, controller.create);
-
-/**
- * @openapi: 3.0.0
- * components:
- *  securitySchemes:
- *   bearerAuth:
- *    type: http
- *    scheme: bearer
- *    bearerFormat: JWT
- * /product/buy:
- *     post:
- *         security:
- *          - bearerAuth: []
- *         summary: Buy products
- *         description: Buy products
- *         requestBody:
- *          required: true
- *          content:
- *           application/json:
- *            schema:
- *             type: object
- *             properties:
- *              ids:
- *                  type: array
- *                  example: [1,2,3]
- *         responses:
- *          201:
- *           description: create order successfully
- *           content:
- *            application/json:
- *             schema:
- *              type: object
- *              properties:
- *               name:
- *                  type: string
- *               description:
- *                  type: string
- *               price:
- *                  type: number
- *               createdAt:
- *                  type: string
- *                  format: date-time
- *          401:
- *           description: create failed
- *           content:
- *            application/json:
- *             schema:
- *              type: object
- *              properties:
- *               error:
- *                type: any
- */
-router.post('/buy', isAuthenticated, controller.buy);
+// router.post('/create', isAuthenticated, controller.create);
 
 module.exports = router;
