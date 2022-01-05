@@ -12,55 +12,41 @@ const isAuthenticated = require('../midlewares/authentication');
  *    type: http
  *    scheme: bearer
  *    bearerFormat: JWT
- * /product/create:
- *     post:
+ * /order:
+ *     get:
  *         security:
  *          - bearerAuth: []
- *         summary: create product
- *         description: create product
- *         requestBody:
- *          required: true
- *          content:
- *           application/json:
- *            schema:
- *             type: object
- *             properties:
- *              name:
- *                  type: string
- *                  example: baby
- *              description:
- *                  type: string
- *                  example: a baby
- *              price:
- *                  type: number
- *                  example: 100000
+ *         summary: List orders
+ *         description: List orders
  *         responses:
- *          201:
- *           description: create product successfully
+ *          200:
+ *           description: list all orders
  *           content:
  *            application/json:
  *             schema:
- *              type: object
+ *              type: array
  *              properties:
- *               name:
+ *               products:
+ *                  type: array
+ *               user:
  *                  type: string
- *               description:
- *                  type: string
- *               price:
+ *               totalPrice:
  *                  type: number
+ *               _id:
+ *                  type: string
  *               createdAt:
  *                  type: string
  *                  format: date-time
  *          401:
- *           description: create failed
+ *           description: get failed
  *           content:
  *            application/json:
  *             schema:
  *              type: object
  *              properties:
  *               error:
- *                type: any
+ *                type: string
  */
-// router.post('/create', isAuthenticated, controller.create);
+router.get('/', isAuthenticated, controller.getAll);
 
 module.exports = router;

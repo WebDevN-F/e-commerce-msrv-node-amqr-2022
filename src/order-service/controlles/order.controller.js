@@ -3,7 +3,7 @@
 
 const Order = require('../order');
 const amqp = require('amqplib');
-var connection, channel;
+var connection, channel, order;
 
 // amqp connection
 async function connect() {
@@ -18,6 +18,7 @@ async function connect() {
     channel = await connection.createChannel();
     await channel.assertQueue('ORDER_QUEUE');
 }
+
 
 function createOrder(products, userEmail) {
     const order = new Order({
@@ -37,28 +38,18 @@ connect().then(() => {
         const newOrder = createOrder(products, userEmail);
 
         channel.ack(data);
+
+        channel.sendToQueue('PRODUCT_QUEUE', Buffer.from(JSON.stringify({ newOrder })));
+
     })
 });
 
-// module.exports.create = async (req, res) => {
-//     if (!req.body.name || !req.body.description || !req.body.price) {
-//         return res.status(400).send({ error: 'Request body is missing' });
-//     }
-
-//     const { name, description, price } = req.body;
-
-//     try {
-//         const product = new Product({
-//             name,
-//             description,
-//             price,
-//         });
-
-//         await product.save();
-
-//         return res.status(201).send(product);
-//     } catch (e) {
-//         console.log(e);
-//         return res.status(400).send({error: e.message});
-//     }
-// }
+module.exports.getAll = async (req, res) => {
+    try {
+        const orders = await Order.find({}).limit(100);
+        return res.status(200).send(orders);
+    } catch (e) {
+        console.log(e);
+        return res.status(400).send({error: e.message});
+    }
+}
